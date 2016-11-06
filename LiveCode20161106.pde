@@ -51,7 +51,9 @@ void setup() {
 
 void draw() {
   background(0, 0, 0);
-  camera(50 * cos(radians(frameCount)), 50 * sin(radians(frameCount)), -500, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+  camera(50 * cos(radians(frameCount)), 50 * sin(radians(frameCount)), -500,
+    75 * cos(radians(frameCount)), 75 * sin(radians(frameCount)), 0.0,
+    0.0, 1.0, 0.0);
   for (int i = 0 ; i < SHAPES ; i++) {
     pushMatrix();
     shape.setStroke(color(i, 100, 100));
