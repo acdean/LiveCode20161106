@@ -2,8 +2,9 @@ import peasy.*;
 
 PeasyCam cam;
 PShape shape;
+boolean video = true;
 
-int SHAPES = 5;
+int SHAPES = 10;
 float SEPARATION = 200;
 float SZ = 60;
 float xoff = SZ * (.866 * 2);
@@ -26,7 +27,7 @@ void setup() {
         x0 = x + .5;
       }
       x0 *= xoff;
-      if (sq(x0) + sq(y0) < sq(1000)) {
+      if (sq(x0) + sq(y0) < sq(2000)) {
         // add a hexagon
         for (int i = 0 ; i < 6 ; i++) {
           float a1 = TWO_PI * i / 6;
@@ -39,6 +40,13 @@ void setup() {
   }
   shape.endShape();
   colorMode(HSB, SHAPES, 100, 100);
+  
+  if (video) {
+    saveFrame("frame#####.png");
+    if (frameCount > 500) {
+      exit();
+    }
+  }
 }
 
 void draw() {
@@ -50,5 +58,11 @@ void draw() {
     translate(0, 0, i * SEPARATION);
     shape(shape);
     popMatrix();
+  }
+}
+
+void keyPressed() {
+  if (key == 's') {
+    saveFrame("snap####.png");
   }
 }
