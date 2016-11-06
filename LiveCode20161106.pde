@@ -14,7 +14,7 @@ void setup() {
   cam = new PeasyCam(this, 500);
   shape = createShape();
   shape.beginShape(LINES);
-  shape.strokeWeight(3)
+  shape.strokeWeight(3);
   shape.stroke(255, 0, 0);
   shape.noFill();
   int range = 20;
