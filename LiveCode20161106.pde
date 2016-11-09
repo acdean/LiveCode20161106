@@ -1,11 +1,11 @@
 import peasy.*;
 
-PeasyCam cam;
+PeasyCam cam; // not used
 PShape shape;
-boolean video = true;
+boolean video = false;
 
-int SHAPES = 10;
-float SEPARATION = 200;
+int SHAPES = 6;
+float SEPARATION = 300;
 float SZ = 60;
 float xoff = SZ * (.866 * 2);
 float yoff = SZ * 1.5;
@@ -15,7 +15,7 @@ void setup() {
   cam = new PeasyCam(this, 500);
   shape = createShape();
   shape.beginShape(LINES);
-  shape.strokeWeight(3);
+  shape.strokeWeight(5);
   shape.stroke(255, 0, 0);
   shape.noFill();
   int range = 20;
@@ -40,26 +40,30 @@ void setup() {
   }
   shape.endShape();
   colorMode(HSB, SHAPES, 100, 100);
-  
-  if (video) {
-    saveFrame("frame#####.png");
-    if (frameCount > 500) {
-      exit();
-    }
-  }
 }
 
 void draw() {
   background(0, 0, 0);
-  camera(50 * cos(radians(frameCount)), 50 * sin(radians(frameCount)), -500,
-    75 * cos(radians(frameCount)), 75 * sin(radians(frameCount)), 0.0,
-    0.0, 1.0, 0.0);
+  
+//  camera(50 * cos(radians(frameCount)), 50 * sin(radians(frameCount)), -500,
+//    100 * cos(radians(frameCount)), 100 * sin(radians(frameCount)), 0.0,
+//    sin(radians(frameCount * .54)), cos(radians(frameCount * .54)), 0.0);
   for (int i = 0 ; i < SHAPES ; i++) {
     pushMatrix();
     shape.setStroke(color(i, 100, 100));
     translate(0, 0, i * SEPARATION);
     shape(shape);
     popMatrix();
+  }
+  
+  if (video) {
+    if (frameCount % 100 == 0) {
+      println("frame: " + frameCount);
+    }
+    saveFrame("frame#####.png");
+    if (frameCount > 500) {
+      exit();
+    }
   }
 }
 
